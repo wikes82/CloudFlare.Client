@@ -56,8 +56,20 @@ public class PagesUnitTests
         var accounts = await client.Accounts.GetAsync();
         var account = accounts.Result[0];
         var accountId = account.Id;
-        var projectName = "TEST_PROJECT_NAME";
+        var projectName = TEST_PROJECT_NAME;
         var pagesProject = await client.Pages.GetProjectDetailsAsync(accountId, projectName);
         pagesProject.Success.Should().BeTrue();
+    }
+
+    [Fact]
+    public async Task TestGetDomainForProjectAsync()
+    {
+        using var client = new CloudFlareClient(WireMockConnection.EmailAddress, WireMockConnection.Key);
+        var accounts = await client.Accounts.GetAsync();
+        var account = accounts.Result[0];
+        var accountId = account.Id;
+        var projectName = "happynailsallenparkmi";
+        var pagesDomain = await client.Pages.GetDomainsForProjectAsync(accountId, projectName);
+        pagesDomain.Success.Should().BeTrue();
     }
 }

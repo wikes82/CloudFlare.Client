@@ -69,4 +69,26 @@ public class Pages : ApiContextBase<IConnection>, IPages
             $"{AccountEndpoints.Base}/{accountId}/{PagesEndpoints.Base}/{PagesEndpoints.Projects}/{projectName}";
         return await Connection.GetAsync<PagesProject>(requestUri, cancellationToken);
     }
+
+    /// <summary>
+    /// Get Domains for CF Pages Project
+    /// </summary>
+    /// <param name="accountId">Account ID</param>
+    /// <param name="projectName">Project Name</param>
+    /// <param name="displayOptions">Display options</param>
+    /// <param name="cancellationToken">Cancellation Token</param>
+    /// <returns>PagesDomain info</returns>
+    public async Task<CloudFlareResult<IReadOnlyList<PagesDomain>>> GetDomainsForProjectAsync(string accountId, string projectName, DisplayOptions displayOptions = null, CancellationToken cancellationToken = default)
+    {
+        var builder = new ParameterBuilderHelper()
+            .InsertValue(Filtering.Page, displayOptions?.Page)
+            .InsertValue(Filtering.PerPage, displayOptions?.PerPage);
+        var requestUri = $"{AccountEndpoints.Base}/{accountId}/{PagesEndpoints.Base}/{PagesEndpoints.Projects}/{projectName}/{PagesEndpoints.Domains}";
+        if (builder.ParameterCollection.HasKeys())
+        {
+            requestUri = $"{requestUri}/?{builder.ParameterCollection}";
+        }
+
+        return await Connection.GetAsync<IReadOnlyList<PagesDomain>>(requestUri, cancellationToken);
+    }
 }

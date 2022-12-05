@@ -38,4 +38,14 @@ public interface IPages
     /// <param name="cancellationToken">CancellationToken</param>
     /// <returns>Details</returns>
     Task<CloudFlareResult<PagesProject>> GetProjectDetailsAsync(string accountId, string projectName, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Get Domains for CF Pages Project
+    /// </summary>
+    /// <param name="accountId">Account ID</param>
+    /// <param name="projectName">Project Name</param>
+    /// <param name="displayOptions">Display Options</param>
+    /// <param name="cancellationToken">Cancellation Token</param>
+    /// <returns>PagesDomain info</returns>
+    Task<CloudFlareResult<IReadOnlyList<PagesDomain>>> GetDomainsForProjectAsync(string accountId, string projectName, DisplayOptions displayOptions = null, CancellationToken cancellationToken = default);
 }
