@@ -1,6 +1,7 @@
 ﻿using System;
 using CloudFlare.Client.Api.Authentication;
 using CloudFlare.Client.Client.Accounts;
+using CloudFlare.Client.Client.Pages;
 using CloudFlare.Client.Client.Users;
 using CloudFlare.Client.Client.Zones;
 using CloudFlare.Client.Contexts;
@@ -26,6 +27,7 @@ namespace CloudFlare.Client
             Accounts = new Accounts(_connection);
             Users = new Users(_connection);
             Zones = new Zones(_connection);
+            Pages = new Pages(_connection);
         }
 
         /// <summary>
@@ -65,6 +67,9 @@ namespace CloudFlare.Client
 
         /// <inheritdoc />
         public IZones Zones { get; }
+
+        /// <inheritdoc cref="Pages"/>
+        public IPages Pages { get; }
 
         /// <summary>
         /// Whether the <see cref="CloudFlareClient"/> is disposed

@@ -6,11 +6,11 @@ namespace CloudFlare.Client.Test
 {
     public class WireMockConnection
     {
-        public static string EmailAddress { get; } = "test@tothnet.hu";
+        public static string EmailAddress { get; } = "";
 
-        public static string Key { get; } = "p@ssw0rd";
+        public static string Key { get; } = "";
 
-        public static string Token { get; } = "8M7wS6hCpXVc-DoRnPPY_UCWPgy8aea4Wy6kCe5T";
+        public static string Token { get; } = "";
 
         public static ApiKeyAuthentication ApiKeyAuthentication { get; } = new(EmailAddress, Key);
 
